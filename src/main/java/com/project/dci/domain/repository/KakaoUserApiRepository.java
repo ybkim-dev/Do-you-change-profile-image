@@ -7,21 +7,21 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 
-@Repository
-public class KakaoApiRepository {
+@Component
+public class KakaoUserApiRepository {
     @Value("${config.api.get-friends.url}")
     private String friendsUrl;
-    @Value("${config.api.get-friends.key}")
+    @Value("${config.api.key}")
     private String friendsToken;
 
-    public KakaoFriendsResponseDto findFriends() {
+    public KakaoFriendsResponseDto findFriendsInfo() {
         URI uri = UriComponentsBuilder
                 .fromUriString(friendsUrl)
                 .queryParam("limit", 100)

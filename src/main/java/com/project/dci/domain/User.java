@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Getter
 public class User {
     private String profileNickname;
-    private String profileThumnailImage;
+    private String profileThumbnailImage;
     private boolean allowed_msg;
     private Long id;
     private String uuid;
