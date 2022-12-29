@@ -4,13 +4,12 @@ import com.project.dci.domain.User;
 import com.project.dci.domain.dto.KakaoFriendsResponseDto;
 import com.project.dci.domain.dto.UserResponseDto;
 import com.project.dci.domain.repository.KakaoUserApiRepository;
-import com.project.dci.domain.repository.MemoryUserRepository;
+import com.project.dci.domain.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.text.MessageFormat;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -19,7 +18,13 @@ import java.util.stream.Stream;
 public class UserService {
 
     private final KakaoUserApiRepository kakaoUserApiRepository;
-    private final MemoryUserRepository memoryUserRepository;
+    private final UserRepository memoryUserRepository;
+
+    public void updateProfileImage(List<UserResponseDto> users) {
+        users.forEach((user) -> {
+            memoryUserRepository.upsertUser(user.toUser());
+        });
+    }
 
     public List<UserResponseDto> getProfileImageChangedFavoriteFriends() {
         KakaoFriendsResponseDto friendsInfo = kakaoUserApiRepository.findFriendsInfo();
