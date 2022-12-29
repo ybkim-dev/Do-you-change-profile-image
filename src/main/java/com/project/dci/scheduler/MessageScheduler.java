@@ -17,7 +17,7 @@ public class MessageScheduler {
         this.messageController = messageController;
     }
 
-    @Scheduled(cron = "*/30 * * * * *")
+    @Scheduled(cron = "0 0 0/1 * * *")
     public void sendMessage() {
         messageController.getUsers(query);
     }
